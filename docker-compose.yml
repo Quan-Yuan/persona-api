@@ -1,0 +1,23 @@
+version: '3'
+services:
+  persona_api:
+    build: persona
+    depends_on:
+      - postgres
+    image: "persona_api"
+    ports:
+      - "8000:8000"
+    links:
+      - "postgres:database"
+
+# TODO: not work fully because of somehow dockerignore doesn't work
+
+  postgres:
+    image: "postgres:alpine"
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_USER: "docker"
+      POSTGRES_PASSWORD: "mysecretpassword"
+      POSTGRES_DB: "people"
+
